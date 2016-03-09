@@ -1,34 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal">
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+    android:weightSum="3">
 
-    <TextView
-        android:id="@+id/eventName"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    <TextView
-        android:id="@+id/startTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="start"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_height="match_parent"
+        android:layout_weight="2.8">
+        <TextView
+            android:id="@+id/eventName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Name"/>
+        <TextView
+            android:id="@+id/startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="start"
+            android:textSize="10dp"
+            android:textColor="#808080"
+            android:layout_below="@id/eventName"/>
 
-    <TextView
-        android:id="@+id/endTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="end"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text=" to "
+            android:textSize="10dp"
+            android:textColor="#808080"
+            android:layout_toRightOf="@id/startTime"
+            android:layout_below="@id/eventName"/>
+
+        <TextView
+            android:id="@+id/endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="end"
+            android:textSize="10dp"
+            android:textColor="#808080"
+            android:layout_toRightOf="@id/to"
+            android:layout_below="@id/eventName"/>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
-        android:padding="5dp"/>
+        android:textSize="10dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        />
 
 </LinearLayout>

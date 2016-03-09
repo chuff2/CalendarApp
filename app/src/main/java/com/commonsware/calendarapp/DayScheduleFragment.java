@@ -1,6 +1,7 @@
 package com.commonsware.calendarapp;
 
 import android.app.ListFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -26,6 +27,10 @@ public class DayScheduleFragment extends ListFragment {
         events = new ArrayList<ScheduleEvent>();
         events.add(new ScheduleEvent("Dinner", "3:30", "5:00"));
         events.add(new ScheduleEvent("Breakfast", "10:00", "7:00"));
+        events.add(new ScheduleEvent("Dinner", "3:30", "5:00"));
+        events.add(new ScheduleEvent("Breakfast", "10:00", "7:00"));
+        events.add(new ScheduleEvent("Dinner", "3:30", "5:00"));
+        events.add(new ScheduleEvent("Breakfast", "10:00", "7:00"));
 
 
 
@@ -36,6 +41,7 @@ public class DayScheduleFragment extends ListFragment {
         super.onViewCreated(view, savedInstanceState);
         //TODO ORM stuff goes here
 
+        Context a = getActivity();
         setListAdapter(new MyCustomAdapter(getActivity(), events));
         getListView().setDivider(null);
     }

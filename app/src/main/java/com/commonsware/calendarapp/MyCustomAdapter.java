@@ -10,6 +10,7 @@ import java.util.List;
 import android.widget.TextView;
 import android.widget.Button;
 import android.os.Bundle;
+import android.app.Activity;
 
 /**
  * Created by connerhuff on 3/8/16.
@@ -17,9 +18,11 @@ import android.os.Bundle;
 public class MyCustomAdapter extends ArrayAdapter<ScheduleEvent> {
 
 
+    Context context;
 
     public MyCustomAdapter(Context context, List<ScheduleEvent> items) {
         super(context, R.layout.fragment_dayschedule, items);
+        this.context = context;
     }
 
 
@@ -29,8 +32,9 @@ public class MyCustomAdapter extends ArrayAdapter<ScheduleEvent> {
         ViewHolder viewHolder;
         if(convertView == null) {
             // inflate the GridView item layout
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.fragment_dayschedule, parent, false);
+            //LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = LayoutInflater.from(context);
+            convertView = inflater.inflate(R.layout.listcell, parent, false);
 
             // initialize the view holder
             viewHolder = new ViewHolder();
