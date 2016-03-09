@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.CalendarView;
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.Toast;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,10 +25,26 @@ public class MainActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
 
+        //date object that will tell the next fragment the day to pull info in for
+        Calendar cal = Calendar.getInstance();
+        String month = ((Integer)(cal.get(Calendar.MONTH) + 1)).toString();
+        String day = ((Integer)cal.get(Calendar.DAY_OF_MONTH)).toString();
+        String year = ((Integer)cal.get(Calendar.YEAR)).toString();
+        String date = month + "/" + day + "/" + year;
+
+
+        DayScheduleFragment newFrag = new DayScheduleFragment();
+        Bundle args = new Bundle();
+        args.putString("date", date);
+        newFrag.setArguments(args);
+
+        getFragmentManager().beginTransaction().
+                replace(R.id.dayschedule_container, newFrag).commit();
+
         //launch the dayschedule fragment
         getFragmentManager()
                 .beginTransaction()
-                .add(R.id.dayschedule_container, new DayScheduleFragment())
+                .replace(R.id.dayschedule_container, newFrag)
                 .addToBackStack(null)
                 .commit();
     }

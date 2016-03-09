@@ -44,10 +44,15 @@ public class CalendarFragment extends Fragment{
             //show the selected date as a toast
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
-                Toast.makeText(getActivity(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
-                //use persistence to get the information for the given date selected...
+                //Toast.makeText(getActivity(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
+                String date = day + "/" + month + "/" + year;
+                DayScheduleFragment newFrag = new DayScheduleFragment();
+                Bundle args = new Bundle();
+                args.putString("date", date);
+                newFrag.setArguments(args);
 
-                //
+                getFragmentManager().beginTransaction().
+                        replace(R.id.dayschedule_container, newFrag).commit();
             }
 
         });
