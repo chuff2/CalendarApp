@@ -1,13 +1,11 @@
 package com.commonsware.calendarapp;
 
 import android.app.Fragment;
-import android.view.View;
-import android.view.LayoutInflater;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
-import android.widget.Toast;
-import java.util.Calendar;
 
 /**
  * Created by connerhuff on 3/8/16.

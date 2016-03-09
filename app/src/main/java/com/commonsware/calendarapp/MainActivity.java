@@ -1,11 +1,9 @@
 package com.commonsware.calendarapp;
 
-import android.app.ListActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.CalendarView;
-import android.widget.CalendarView.OnDateChangeListener;
-import android.widget.Toast;
+
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         args.putString("date", date);
         newFrag.setArguments(args);
 
-        getFragmentManager().beginTransaction().
-                replace(R.id.dayschedule_container, newFrag).commit();
+        //getFragmentManager().beginTransaction().
+          //      replace(R.id.dayschedule_container, newFrag).commit();
 
         //launch the dayschedule fragment
         getFragmentManager()

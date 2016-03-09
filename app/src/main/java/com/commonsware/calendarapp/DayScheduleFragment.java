@@ -1,17 +1,12 @@
 package com.commonsware.calendarapp;
 
-import android.app.Fragment;
 import android.app.ListFragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
-import android.content.Context;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +14,33 @@ import java.util.List;
  */
 public class DayScheduleFragment extends ListFragment {
 
-    private List<ScheduleEvent> schedList;
-    private String data;
-    private static final String[] items = {"Conner", "Austin", "Huff"};
+    private String data;//the date that is given to us from CalendarFragment/MainActivity
+    private List<ScheduleEvent> events;
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //temporary stuff
+        events = new ArrayList<ScheduleEvent>();
+        events.add(new ScheduleEvent("Dinner", "3:30", "5:00"));
+        events.add(new ScheduleEvent("Breakfast", "10:00", "7:00"));
+
+
+
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //TODO ORM stuff goes here
+
+        setListAdapter(new MyCustomAdapter(getActivity(), events));
+        getListView().setDivider(null);
+    }
+
+    /*
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,54 +50,18 @@ public class DayScheduleFragment extends ListFragment {
 
         return inflater.inflate(R.layout.fragment_dayschedule, container, false);
     }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
-        super.onViewCreated(view, savedInstanceState);
-        setListAdapter(new IconicAdapter());
-        Toast.makeText(getActivity(), data, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        //getListView().setOnItemClickListener(this);
-    }
-
-
+    */
 
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        setListAdapter(new MyCustomAdapter());
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        // retrieve theListView item
+        ScheduleEvent item = events.get(position);
+
+        // do something
+        Toast.makeText(getActivity(), item.getEventName(), Toast.LENGTH_SHORT).show();
     }
 
-    public class MyCustomAdapter extends ArrayAdapter<String> {
-        public MyCustomAdapter(Context context, int resource, int textViewResourceId, String[] dayOfWeek) {
-            super(context, resource, textViewResourceId, dayOfWeek);
-        }
-
-        @Override
-        public View getView(int position, View convertView,
-                            ViewGroup parent) {
-            /*
-            View row=super.getView(position, convertView, parent);
-            ImageView icon=(ImageView)row.findViewById(R.id.icon);
-            if (items[position].length()>4) {
-                icon.setImageResource(R.drawable.delete);
-            }
-            else {
-                icon.setImageResource(R.drawable.ok);
-            }
-            TextView size=(TextView)row.findViewById(R.id.size);
-            size.setText(String.format(getString(R.string.size_template),
-                    items[position].length()));
-            return(row);
-            */
-            return null;
-        }
-    }
 
 
 }
