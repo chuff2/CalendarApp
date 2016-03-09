@@ -34,7 +34,7 @@ public class CalendarFragment extends Fragment{
         calendar.setShowWeekNumber(false);
         // sets the first day of week according to Calendar.
         // here we set Monday as the first day of the Calendar
-        calendar.setFirstDayOfWeek(2);
+        calendar.setFirstDayOfWeek(1);
 
 
         //sets the listener to be notified upon selected date change.
@@ -43,7 +43,7 @@ public class CalendarFragment extends Fragment{
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
                 //Toast.makeText(getActivity(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
-                String date = month + "/" + day + "/" + year;
+                String date = (month + 1) + "-" + day + "-" + year;
                 ((MainActivity) getActivity()).setCurrentDate(date); //set date var in activity
 
                 //TODO ORM goes here...

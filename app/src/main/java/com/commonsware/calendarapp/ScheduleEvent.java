@@ -11,10 +11,11 @@ public class ScheduleEvent {
     private int id;
     private String date;
 
-    public ScheduleEvent (String eventName, String startTime, String endTime){
+    public ScheduleEvent (String eventName, String startTime, String endTime, String date){
         this.eventName = eventName;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.date = date;
     }
 
     public String getEventName() {

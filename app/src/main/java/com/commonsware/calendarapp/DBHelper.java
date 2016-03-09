@@ -3,7 +3,6 @@ package com.commonsware.calendarapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -23,6 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String EVENTS_COLUMN_END = "end";
     public static final String EVENTS_COLUMN_DATE = "date";
     //public static final String CONTACTS_COLUMN_NAME = "name";
+    SQLiteDatabase db;
 
     public DBHelper(Context context)
     {
@@ -32,6 +32,8 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
+        //db.openOrCreateDatabase("MyDBName.db", null, ((MainActivity) getActivity()).MODE_PRIVATE);
+        //db = this.getReadableDatabase();
         db.execSQL(
                 "create table events " +
                         "(id integer primary key, name text,start text,end text, date text)"
@@ -45,9 +47,9 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertEvent  (String name, String start, String end, String date)
+    public boolean insertEvent(String name, String start, String end, String date)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("start", start);
@@ -95,19 +97,39 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[] { Integer.toString(id) });
     }
 
-    public ArrayList<String> getAllCotacts()
+
+    public ArrayList<ScheduleEvent> getAllEventsFromDate(String date)
     {
-        ArrayList<String> array_list = new ArrayList<String>();
+        ArrayList<ScheduleEvent> array_list = new ArrayList<ScheduleEvent>();
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from events", null );
+        //Cursor res =  db.rawQuery( "select * from events where 'date' = " + date, null );
+        String query = "select * from events where date = '" + date + "'";
+        //query = query.replace("/", "////");
+        Cursor res =  db.rawQuery(query, null );
+
         res.moveToFirst();
 
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(CONTACTS_COLUMN_NAME)));
+
+            String name = res.getString(res.getColumnIndex(EVENTS_COLUMN_NAME));
+            String start = res.getString(res.getColumnIndex(EVENTS_COLUMN_START));
+            String end = res.getString(res.getColumnIndex(EVENTS_COLUMN_END));
+            String currDate = res.getString(res.getColumnIndex(EVENTS_COLUMN_DATE));
+
+            ScheduleEvent s = new ScheduleEvent(name, start, end, currDate);
+            array_list.add(s);
             res.moveToNext();
         }
         return array_list;
     }
+
+
+    /*
+    public void restartDBDebug(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS events");
+    }
+    */
 }

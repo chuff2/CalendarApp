@@ -23,17 +23,22 @@ public class AddEventFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_addevent, container, false);
-        eName = (EditText) v.findViewById(R.id.newEventName);
+        eName = ((EditText) v.findViewById(R.id.newEventName));
         sTime = (EditText) v.findViewById(R.id.newStartTime);
         eTime = (EditText) v.findViewById(R.id.newEndTime);
         button = (Button) v.findViewById(R.id.saveButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
+                //Create new object (kinda redundant tho..)
                 ScheduleEvent newSEvent = new ScheduleEvent(eName.getText().toString(),
-                        sTime.getText().toString(), eTime.getText().toString());
+                        sTime.getText().toString(), eTime.getText().toString(),
+                        ((MainActivity)getActivity()).getCurrentDate());
                 ((MainActivity) getActivity()).setNewEvent(newSEvent);
-                //bring back the event list fragment
+                //Insert into the db
+                ((MainActivity) getActivity()).getMydb().insertEvent(eName.getText().toString(),
+                        sTime.getText().toString(), eTime.getText().toString(),
+                        ((MainActivity) getActivity()).getCurrentDate());
+
                 DayScheduleFragment newFrag = new DayScheduleFragment();
                 Bundle args = new Bundle();
                 args.putString("date", ((MainActivity) getActivity()).getCurrentDate());

@@ -2,11 +2,12 @@ package com.commonsware.calendarapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.CalendarView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CalendarView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,12 +15,18 @@ public class MainActivity extends AppCompatActivity {
     CalendarView calendar;
     public String currentDate;
     public ScheduleEvent newEvent;
+    public ArrayList<ScheduleEvent> events;
+    DBHelper mydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //sets the main layout of the activity
         setContentView(R.layout.activity_main);
+
+        mydb = new DBHelper(this);
+        //debug mode
+        //this.deleteDatabase("MyDBName.db");
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -36,14 +43,28 @@ public class MainActivity extends AppCompatActivity {
         String month = ((Integer)(cal.get(Calendar.MONTH) + 1)).toString();
         String day = ((Integer)cal.get(Calendar.DAY_OF_MONTH)).toString();
         String year = ((Integer)cal.get(Calendar.YEAR)).toString();
-        String date = month + "/" + day + "/" + year;
+        String date = month + "-" + day + "-" + year;
         setCurrentDate(date);
 
 
         DayScheduleFragment newFrag = new DayScheduleFragment();
+        /*
         Bundle args = new Bundle();
         args.putString("date", date);
         newFrag.setArguments(args);
+        */
+
+        //temp
+        /*
+        if (!mydb.insertEvent("Dinner", "5:00", "6:00", "3-9-2016")){
+            Toast.makeText(this, "Failure", Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
+        }
+        */
+
+        events = mydb.getAllEventsFromDate(date);
 
         //launch the dayschedule fragment
         getFragmentManager()
@@ -83,6 +104,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public DBHelper getMydb() {
+        return mydb;
+    }
+
+    public void setMydb(DBHelper mydb) {
+        this.mydb = mydb;
+    }
+
     public void setCurrentDate(String date){
         this.currentDate = date;
     }
@@ -95,4 +124,11 @@ public class MainActivity extends AppCompatActivity {
         this.newEvent = s;
     }
 
+    public ArrayList<ScheduleEvent> getEvents() {
+        return events;
+    }
+
+    public void setEvents(ArrayList<ScheduleEvent> events) {
+        this.events = events;
+    }
 }
