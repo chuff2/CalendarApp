@@ -43,7 +43,9 @@ public class CalendarFragment extends Fragment{
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
                 //Toast.makeText(getActivity(), day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
-                String date = day + "/" + month + "/" + year;
+                String date = month + "/" + day + "/" + year;
+                ((MainActivity) getActivity()).setCurrentDate(date); //set date var in activity
+
                 DayScheduleFragment newFrag = new DayScheduleFragment();
                 Bundle args = new Bundle();
                 args.putString("date", date);

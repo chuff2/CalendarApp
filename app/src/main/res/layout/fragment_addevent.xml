@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/newEventName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="New Event Name"
+        android:gravity="top"/>
+
+    <EditText
+        android:id="@+id/newStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Start Time"
+        android:layout_below="@id/newEventName"/>
+
+
+    <EditText
+        android:id="newEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="End Time"
+        android:layout_toRightOf="@id/newStartTime"
+        android:layout_below="@id/newEventName"/>
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Event"
+        android:layout_below="@id/newStartTime"/>
+
+</RelativeLayout>
