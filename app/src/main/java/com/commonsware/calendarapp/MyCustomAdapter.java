@@ -51,7 +51,12 @@ public class MyCustomAdapter extends ArrayAdapter<ScheduleEvent> {
 
         // update the item view
         ScheduleEvent item = getItem(position);
-        viewHolder.eventName.setText(item.getEventName());
+        if (item.getEventName().length() >= 20){
+            viewHolder.eventName.setText(item.getEventName().substring(0,20) + "...");
+        }
+        else{
+            viewHolder.eventName.setText(item.getEventName());
+        }
         viewHolder.startTime.setText(item.getStartTime());
         viewHolder.endTime.setText(item.getEndTime());
         return convertView;

@@ -45,9 +45,6 @@ public class MainActivity extends AppCompatActivity {
         args.putString("date", date);
         newFrag.setArguments(args);
 
-        //getFragmentManager().beginTransaction().
-          //      replace(R.id.dayschedule_container, newFrag).commit();
-
         //launch the dayschedule fragment
         getFragmentManager()
                 .beginTransaction()

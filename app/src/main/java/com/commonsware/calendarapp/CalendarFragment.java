@@ -46,6 +46,8 @@ public class CalendarFragment extends Fragment{
                 String date = month + "/" + day + "/" + year;
                 ((MainActivity) getActivity()).setCurrentDate(date); //set date var in activity
 
+                //TODO ORM goes here...
+
                 DayScheduleFragment newFrag = new DayScheduleFragment();
                 Bundle args = new Bundle();
                 args.putString("date", date);

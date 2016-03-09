@@ -25,7 +25,7 @@ public class DayScheduleFragment extends ListFragment {
 
         //temporary stuff
         events = new ArrayList<ScheduleEvent>();
-        events.add(new ScheduleEvent("Dinner", "3:30", "5:00"));
+        events.add(new ScheduleEvent("DinnerDinnerDinnerDinner", "3:30", "5:00"));
         events.add(new ScheduleEvent("Breakfast", "10:00", "7:00"));
         events.add(new ScheduleEvent("Dinner", "3:30", "5:00"));
         events.add(new ScheduleEvent("Breakfast", "10:00", "7:00"));

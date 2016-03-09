@@ -8,6 +8,8 @@ public class ScheduleEvent {
     private String eventName;
     private String startTime;
     private String endTime;
+    private int id;
+    private String date;
 
     public ScheduleEvent (String eventName, String startTime, String endTime){
         this.eventName = eventName;
@@ -17,6 +19,22 @@ public class ScheduleEvent {
 
     public String getEventName() {
         return eventName;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setEventName(String eventName) {
