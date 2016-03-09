@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     CalendarView calendar;
     public String currentDate;
+    public ScheduleEvent newEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.dayschedule_container, newFrag)
                     .addToBackStack(null)
                     .commit();
-            return true;
+            //return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -91,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
 
     public String getCurrentDate(){
         return this.currentDate;
+    }
+
+    public void setNewEvent(ScheduleEvent s){
+        this.newEvent = s;
     }
 
 }
