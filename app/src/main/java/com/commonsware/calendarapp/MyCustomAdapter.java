@@ -1,16 +1,17 @@
 package com.commonsware.calendarapp;
 
 import android.content.Context;
-import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.*;
-import android.widget.ImageView;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import java.util.List;
-import android.widget.TextView;
 import android.widget.Button;
-import android.os.Bundle;
-import android.app.Activity;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 /**
  * Created by connerhuff on 3/8/16.
@@ -48,6 +49,35 @@ public class MyCustomAdapter extends ArrayAdapter<ScheduleEvent> {
             // recycle the already inflated view
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        viewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //return false;
+                // retrieve theListView item
+                String name = ((TextView)((RelativeLayout)((LinearLayout) v.getParent())
+                        .getChildAt(0)).getChildAt(0)).getText().toString();
+                String date = MainActivity.currentDate;
+                //Toast.makeText(context, name + date, Toast.LENGTH_SHORT).show();
+                MainActivity.mydb.deleteEvent(name, date);
+
+                DayScheduleFragment newFrag = new DayScheduleFragment();
+                MainActivity.f.beginTransaction().
+                        replace(R.id.dayschedule_container, newFrag).commit();
+                /*
+                ScheduleEvent item = events.get(position);
+
+                events.remove(position);
+                ((MainActivity) getActivity()).getMydb().deleteEvent(item.getId());
+
+
+                DayScheduleFragment newFrag = new DayScheduleFragment();
+                getFragmentManager().beginTransaction().
+                        replace(R.id.dayschedule_container, newFrag).commit();
+                */
+            }
+        });
 
         // update the item view
         ScheduleEvent item = getItem(position);

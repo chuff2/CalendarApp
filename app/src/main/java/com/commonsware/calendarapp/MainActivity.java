@@ -1,5 +1,7 @@
 package com.commonsware.calendarapp;
 
+
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,10 +15,11 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     CalendarView calendar;
-    public String currentDate;
+    public static String currentDate;
     public ScheduleEvent newEvent;
     public ArrayList<ScheduleEvent> events;
-    DBHelper mydb;
+    public static DBHelper mydb;
+    public static FragmentManager f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
         events = mydb.getAllEventsFromDate(date);
 
+        f = getFragmentManager();
         //launch the dayschedule fragment
-        getFragmentManager()
-                .beginTransaction()
+        f.beginTransaction()
                 .replace(R.id.dayschedule_container, newFrag)
                 .addToBackStack(null)
                 .commit();

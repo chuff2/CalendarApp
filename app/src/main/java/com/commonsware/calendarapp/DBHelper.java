@@ -90,11 +90,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     */
 
-    public Integer deleteEvent (Integer id) {
+    public void deleteEvent (String name, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("events",
-                "id = ? ",
-                new String[] { Integer.toString(id) });
+        db.execSQL("DELETE FROM events WHERE name = '" + name + "' AND date = '" + date + "';");
     }
 
 

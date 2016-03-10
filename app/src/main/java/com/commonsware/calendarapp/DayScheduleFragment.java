@@ -1,11 +1,10 @@
 package com.commonsware.calendarapp;
 
 import android.app.ListFragment;
-import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -43,39 +42,41 @@ public class DayScheduleFragment extends ListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Context a = getActivity();
-        setListAdapter(new MyCustomAdapter(getActivity(), events));
-        getListView().setDivider(null);
+
     }
 
-    /*
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        if (getArguments() != null)
-            data = getArguments().getString("date");
 
-        return inflater.inflate(R.layout.fragment_dayschedule, container, false);
+        setListAdapter(new MyCustomAdapter(getActivity(), events));
+        //getListView().setDivider(null);
+        //return inflater.inflate(R.layout.fragment_dayschedule, container, false);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
-    */
 
 
+
+    /*
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+
         // retrieve theListView item
         ScheduleEvent item = events.get(position);
 
         events.remove(position);
         ((MainActivity) getActivity()).getMydb().deleteEvent(item.getId());
 
+
         DayScheduleFragment newFrag = new DayScheduleFragment();
         getFragmentManager().beginTransaction().
                 replace(R.id.dayschedule_container, newFrag).commit();
 
         // do something
-        Toast.makeText(getActivity(), item.getEventName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText((MainActivity) getActivity(), item.getEventName(), Toast.LENGTH_SHORT).show();
     }
+    */
 
 
 
